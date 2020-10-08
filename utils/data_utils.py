@@ -103,7 +103,7 @@ def _AWA_read_img_from_file(data_dir, file_name, img_height, img_width):
             count += 1
 
             if count % 1000 == 0:
-                print 'Finish reading {:07d}'.format(count)
+                print('Finish reading {:07d}'.format(count))
 
     # Convert the labels to one-hot
     y = dense_to_one_hot(np.array(labels))
@@ -258,7 +258,7 @@ def _CUB_read_img_from_file(data_dir, file_name, img_height, img_width):
             count += 1
 
             if count % 1000 == 0:
-                print 'Finish reading {:07d}'.format(count)
+                print('Finish reading {:07d}'.format(count))
 
     # Convert the labels to one-hot
     y = dense_to_one_hot(np.array(labels))
@@ -493,8 +493,8 @@ def _get_cifar(data_dir, is_cifar_100):
         x_validation = _X[40000:]
         y_validation = _Y[40000:]
     else:
-    	# Load all the training batches of the CIFAR-10
-    	for i in range(5):
+    	  # Load all the training batches of the CIFAR-10
+        for i in range(5):
             f = open(data_dir + CIFAR_10_DIR + '/data_batch_' + str(i + 1), 'rb')
             datadict = pickle.load(f)
             f.close()
@@ -507,12 +507,12 @@ def _get_cifar(data_dir, is_cifar_100):
             _X = _X.reshape([-1, 3, 32, 32])
             _X = _X.transpose([0, 2, 3, 1])
             
-            if x_train is None:
-                x_train = _X
-                y_train = _Y
-            else:
-            	x_train = np.concatenate((x_train, _X), axis=0)
-            	y_train = np.concatenate((y_train, _Y), axis=0)
+        if x_train is None:
+            x_train = _X
+            y_train = _Y
+        else:
+            x_train = np.concatenate((x_train, _X), axis=0)
+            y_train = np.concatenate((y_train, _Y), axis=0)
     
         # Compute the data mean for normalization
         x_train_mean = np.mean(x_train, axis=0)
@@ -658,7 +658,7 @@ def construct_permute_mnist(num_tasks):
     datasets = []
 
     for i in range(num_tasks):
-        perm_inds = range(mnist.train.images.shape[1])
+        perm_inds = list(range(mnist.train.images.shape[1]))
         np.random.shuffle(perm_inds)
         copied_mnist = deepcopy(mnist)
         sets = ["train", "validation", "test"]
